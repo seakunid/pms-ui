@@ -17,8 +17,8 @@
                             Status:
                             <span>Tidak Aktif</span>
                             <div class="custom-control custom-switch">
-                                <input @change="changeStatusPacket(packet)" type="checkbox" class="custom-control-input" id="customSwitch1" :checked="packet.active">
-                                <label class="custom-control-label" for="customSwitch1"></label>
+                                <input @click="changeStatusPacket(packet)" type="checkbox" class="custom-control-input" :id="`customSwitch${packet.id}`" :checked="packet.active">
+                                <label class="custom-control-label" :for="`customSwitch${packet.id}`"></label>
                             </div>
                             <span>Aktif</span>
                         </div>
@@ -42,10 +42,21 @@ export default {
             showAlert: false
         }
     },
+    beforeMount() {
+        this.checkLoggedUser()
+    },
     mounted() {
         this.getDataPackets()
     },
     methods: {
+        checkLoggedUser() {
+            const expired = localStorage.getItem('expired') && localStorage.getItem('expired')
+            if (expired) {
+                Date.now() >= expired && (window.location = '/')
+            } else {
+                window.location = '/'
+            }
+        },
         getDataPackets() {
             axios.get('https://seakun-packet-api-v1.herokuapp.com/netflix')
             .then(res => {
@@ -64,6 +75,7 @@ export default {
                 console.log(res.data);
                 console.log('Paket berhasil di update');
                 this.showAlert = true
+                this.getDataPackets()
                 setTimeout(() => {
                     this.showAlert = false
                 }, 5000);
