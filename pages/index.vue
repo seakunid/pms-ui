@@ -35,6 +35,14 @@ export default {
         {
           username: 'faishal@seakun.id',
           password: 'seakun#123'
+        },
+        {
+          username: 'amel@seakun.id',
+          password: 'amel#123'
+        },
+        {
+          username: 'fara@seakun.id',
+          password: 'fara#123'
         }
       ],
       username: '',
