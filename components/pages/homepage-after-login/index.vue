@@ -38,6 +38,7 @@ export default {
 <style lang="scss" scoped>
 .layout {
   display: flex;
+  justify-content: space-around;
   &__left {
     width: 26%;
   }
@@ -51,16 +52,6 @@ export default {
 }
 
 .title {
-  font-family:
-    'Quicksand',
-    'Source Sans Pro',
-    -apple-system,
-    BlinkMacSystemFont,
-    'Segoe UI',
-    Roboto,
-    'Helvetica Neue',
-    Arial,
-    sans-serif;
   display: block;
   font-weight: 300;
   font-size: 100px;
@@ -78,5 +69,18 @@ export default {
 
 .links {
   padding-top: 15px;
+}
+@media (max-width: 800px) {
+  .layout {
+    &__left {
+      width: 38%;
+    }
+  }
+  .title {
+    font-size: 40px;
+  }
+  .content {
+    padding: 51px;
+  }
 }
 </style>

@@ -137,4 +137,12 @@ export default {
     }
 }
 
+@media (max-width: 800px) {
+  .layout {
+    &__left {
+      width: 39%;
+    }
+  }
+}
+
 </style>
