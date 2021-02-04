@@ -9,20 +9,25 @@
                 <div class="alert alert-success" role="alert" v-if="showAlert">
                     Status Packet Berhasil di Update
                 </div>
-                <div class="content__packet" v-for="(packet, index) in packets" :key="index">
-                    <div class="detail">
-                        <div>Nama Paket: {{packet.name}}</div>
-                        <div>ID Paket: {{packet.id}}</div>
-                        <div class="detail-status">
-                            Status:
-                            <span>Tidak Aktif</span>
-                            <div class="custom-control custom-switch">
-                                <input @click="changeStatusPacket(packet)" type="checkbox" class="custom-control-input" :id="`customSwitch${packet.id}`" :checked="packet.active">
-                                <label class="custom-control-label" :for="`customSwitch${packet.id}`"></label>
-                            </div>
-                            <span>Aktif</span>
-                        </div>
-                    </div>
+                <Loading
+                  :isShow="showLoading"
+                />
+                <div v-if="!showLoading">
+                  <div class="content__packet" v-for="(packet, index) in packets" :key="index">
+                      <div class="detail">
+                          <div>Nama Paket: {{packet.name}}</div>
+                          <div>ID Paket: {{packet.id}}</div>
+                          <div class="detail-status">
+                              Status:
+                              <span>Tidak Aktif</span>
+                              <div class="custom-control custom-switch">
+                                  <input @click="changeStatusPacket(packet)" type="checkbox" class="custom-control-input" :id="`customSwitch${packet.id}`" :checked="packet.active">
+                                  <label class="custom-control-label" :for="`customSwitch${packet.id}`"></label>
+                              </div>
+                              <span>Aktif</span>
+                          </div>
+                      </div>
+                  </div>
                 </div>
             </div> 
         </div>
@@ -32,16 +37,18 @@
 <script>
 import axios from 'axios'
 import SideBar from '~/components/mollecules/SideBar'
+import Loading from '~/components/mollecules/Loading'
 export default {
     components: {
         SideBar,
+        Loading
     },
     data() {
         return {
             packets: [],
             showAlert: false,
             provider: '',
-            route: window.location.hash
+            showLoading: false
         }
     },
     beforeMount() {
@@ -68,11 +75,14 @@ export default {
             }
         },
         getDataPackets() {
+            this.showLoading = true
             axios.get(`https://seakun-packet-api-v1.herokuapp.com/${this.provider.toLowerCase()}`)
             .then(res => {
+                this.showLoading = false
                 this.packets = res.data
             })
             .catch(err => {
+                this.showLoading = false
                 console.log(err);
             })
         },
@@ -102,10 +112,10 @@ export default {
 .layout {
     display: flex;
     &__left {
-        width: 26%;
+        width: 20%;
     }
     &__right {
-        width: 74%;
+        width: 78%;
     }
 }
 
