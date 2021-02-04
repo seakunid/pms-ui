@@ -1,25 +1,9 @@
 <template>
     <div align="left" class="sidebar">
         <ul class="list-group">
-            <li class="list-group-item" style="padding: 0px!important">
-                <p class="label" @click="$router.push('/netflix')">Netflix</p>
+            <li v-for="(provider, id) in providers" :key="id" class="list-group-item" style="padding: 0px!important">
+                <p class="label" @click="$router.push(`/provider?name=${provider.name.toLowerCase()}`)">{{ provider.name }}</p>
             </li>
-            <li class="list-group-item" style="padding: 0px!important">
-                <p class="label" @click="$router.push('/spotify')">Spotify</p>
-            </li>
-            <!-- <li class="list-group-item">
-                <p class="label" @click.prevent="spotify.isOpen = !spotify.isOpen">Spotify</p>
-                <transition name="slide-fade">
-                    <ul class="sidebar__child" v-if="spotify.isOpen">
-                        <li class="list-group-item child-list">
-                            <nuxt-link to="/created-account?provider=Spotify">Send Created Spotify Account</nuxt-link>
-                        </li>
-                        <li class="list-group-item child-list">
-                            <nuxt-link to="/billing?provider=Spotify">Send Billing</nuxt-link>
-                        </li>
-                    </ul>
-                </transition>
-            </li> -->
         </ul>
     </div>
 </template>
@@ -28,14 +12,26 @@
 export default {
     data() {
         return {
-            netflix: {
-                isOpen: true,
-                active: true
-            },
-            spotify: {
-                isOpen: false,
-                active: true
-            },
+            providers: [
+                {
+                    name: 'Netflix'
+                },
+                {
+                    name: 'Spotify'
+                },
+                {
+                    name: 'Gramedia'
+                },
+                {
+                    name: 'Youtube'
+                },
+                {
+                    name: 'Microsoft365'
+                },
+                {
+                    name: 'Canva'
+                }
+            ]
         }
     }
 }
