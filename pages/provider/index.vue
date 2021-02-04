@@ -40,7 +40,8 @@ export default {
         return {
             packets: [],
             showAlert: false,
-            provider: ''
+            provider: '',
+            route: window.location.hash
         }
     },
     beforeMount() {
@@ -49,6 +50,13 @@ export default {
     mounted() {
         this.provider = this.$route.query.name
         this.getDataPackets()
+    },
+    watch: {
+      $route(to) {
+        const { name } = to.query
+        this.provider = name
+        this.getDataPackets()
+      }
     },
     methods: {
         checkLoggedUser() {
