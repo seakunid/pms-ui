@@ -76,7 +76,7 @@ export default {
         },
         getDataPackets() {
             this.showLoading = true
-            axios.get(`https://seakun-packet-api.herokuapp.com/${this.provider.toLowerCase()}`)
+            axios.get(`https://seakun-packet-api-v1.herokuapp.com/${this.provider.toLowerCase()}`)
             .then(res => {
                 this.showLoading = false
                 this.packets = res.data
@@ -90,7 +90,7 @@ export default {
             let payload = {
                 active: !packet.active
             }
-            axios.patch(`https://seakun-packet-api.herokuapp.com/${this.provider.toLowerCase()}/${packet.id}`, payload)
+            axios.patch(`https://seakun-packet-api-v1.herokuapp.com/${this.provider.toLowerCase()}/${packet.id}`, payload)
             .then(res => {
                 console.log(res.data);
                 console.log('Paket berhasil di update');
