@@ -67,7 +67,7 @@ export default {
     },
     async fetchLogin(username,password){
       try {
-        const checkCredential = await axios.post('https://seakun-packet-api-v1.herokuapp.com/signin',{
+        const checkCredential = await axios.post('https://seakun-packet-api-v2.herokuapp.com/signin',{
             username,
             password
         })
